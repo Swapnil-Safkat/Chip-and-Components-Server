@@ -24,6 +24,12 @@ async function run() {
     await client.connect();
     const productCollection = client.db('ChipAndComps').collection('Products');
 
+    //get all items
+    app.get('/products', async (req, res) => {
+      const cursor = productCollection.find({});
+      const services = await cursor.limit(6).toArray();
+      res.send(services);
+    });
     // add a new service to mongo
     app.post('/products', async (req, res) => {
       const result = await productCollection.insertOne(req.body);
