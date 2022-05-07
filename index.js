@@ -35,7 +35,15 @@ async function run() {
       const result = await productCollection.insertOne(req.body);
       res.send(result);
     });
-
+    //get a single product from id
+    app.get('/item/:id', async (req, res) => {
+      const query = {
+        _id: ObjectId(req.params.id)
+      };
+      console.log(req.params.id);
+      const item = await productCollection.findOne(query);
+      res.send(item);
+    });
   } finally { }
 }
 run().catch(console.dir);
