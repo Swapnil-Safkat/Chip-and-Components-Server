@@ -48,6 +48,7 @@ async function run() {
       const item = await productCollection.findOne(query);
       res.send(item);
     });
+   
     //update a product stock
     app.put('/item/:id', async (req, res) => {
       const id = req.params.id;
